@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Bank App</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.balance {
+    margin-bottom: 20px;
+}
+
+.transaction input {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.transaction button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+}
+
+.transaction button:hover {
+    background-color: #218838;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bank Application</h1>
+        <div class="balance">
+            <h2>Balance: $<span id="balance">0</span></h2>
+        </div>
+        <div class="transaction">
+            <input type="number" id="amount" placeholder="Enter amount" />
+            <button onclick="deposit()">Deposit</button>
+            <button onclick="withdraw()">Withdraw</button>
+        </div>
+    </div>
+    <script>
+        let balance = 0;
+
+function updateBalanceDisplay() {
+    document.getElementById('balance').innerText = balance;
+}
+
+function deposit() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    if (!isNaN(amount) && amount > 0) {
+        balance += amount;
+        updateBalanceDisplay();
+        document.getElementById('amount').value = ''; // Clear input
+    } else {
+        alert("Please enter a valid amount.");
+    }
+}
+
+function withdraw() {
+    const amount = parseFloat(document.getElementById('amount').value);
+    if (!isNaN(amount) && amount > 0) {
+        if (amount <= balance) {
+            balance -= amount;
+            updateBalanceDisplay();
+            document.getElementById('amount').value = ''; // Clear input
+        } else {
+            alert("Insufficient funds.");
+        }
+    } else {
+        alert("Please enter a valid amount.");
+    }
+}
+
+    </script>
+</body>
+</html>
